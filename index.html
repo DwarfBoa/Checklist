@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checklists</title>
+    <link rel="stylesheet" href="css/checklist.css" />
+    <!-- Add Gothic Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body>
+    <h1>Checklists</h1>
+
+    <!-- Movies Checklist -->
+    <section class="checklist-section">
+      <h2>Movies</h2>
+      <form class="box" id="moviesChecklistForm"></form>
+      <div class="add-item">
+        <input type="text" id="newMovieInput" placeholder="Enter new movie" />
+        <button id="addMovieButton" class="button">Add</button>
+      </div>
+    </section>
+
+    <!-- Activities Checklist -->
+    <section class="checklist-section">
+      <h2>Activities</h2>
+      <form class="box" id="activitiesChecklistForm"></form>
+      <div class="add-item">
+        <input
+          type="text"
+          id="newActivityInput"
+          placeholder="Enter new activity" />
+        <button id="addActivityButton" class="button">Add</button>
+      </div>
+    </section>
+
+    <!-- Link to the JavaScript file -->
+    <script src="js/checklist.js"></script>
+  </body>
+</html>
