@@ -1,16 +1,25 @@
 // Import the Firebase SDK modules you need
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, push, set, update, remove } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  push,
+  set,
+  update,
+  remove,
+} from "firebase/database";
 
 // Firebase configuration (replace with your Firebase config)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
+  apiKey: "AIzaSyBbe15VXxGOK-Cyn8R7LhCdBca02scIClk",
+  authDomain: "checklist-aaa78.firebaseapp.com",
+  databaseURL:
+    "https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "checklist-aaa78",
+  storageBucket: "checklist-aaa78.firebasestorage.app",
+  messagingSenderId: "811744103873",
+  appId: "1:811744103873:web:46da1c5bbcedaca5e1b340",
 };
 
 // Initialize Firebase
