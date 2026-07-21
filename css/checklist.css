@@ -1,10 +1,10 @@
-/* General body styling - Lightened the center of the void for readability */
+/* General body styling - Sinister but professional */
 body {
-  background: radial-gradient(circle at center, #250505 0%, #0a0a0a 100%);
-  color: #e0d7c6; /* Pale bone color for high legibility */
+  background: radial-gradient(circle at center, #1a0202 0%, #050505 100%);
+  color: #e0d7c6; /* Pale Bone color for high legibility */
   font-family: "Cinzel", serif;
   margin: 0;
-  padding: 60px 20px;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +12,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Atmospheric vignette - slightly less oppressive */
+/* Atmospheric vignette */
 body::before {
   content: "";
   position: fixed;
@@ -25,50 +25,59 @@ body::before {
   z-index: 10;
 }
 
-/* High-end Gothic Heading - Sharper blood red */
+/* High-end Gothic Heading */
 h1 {
-  font-size: 4rem;
-  color: #af0000;
-  text-shadow: 0 0 15px rgba(255, 0, 0, 0.4), 2px 2px 4px #000;
+  font-size: 3.5rem;
+  color: #af0000; /* Sharp blood red */
+  text-shadow: 0 0 20px rgba(175, 0, 0, 0.4), 2px 2px 4px #000;
   margin-bottom: 50px;
   text-transform: uppercase;
   letter-spacing: 8px;
-  animation: pulseGlow 4s infinite ease-in-out;
-}
-
-@keyframes pulseGlow {
-  0%,
-  100% {
-    text-shadow: 0 0 15px rgba(175, 0, 0, 0.5);
-  }
-  50% {
-    text-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
-  }
-}
-
-/* Section styling - Now with a "Polished Onyx" look */
-.checklist-section {
-  background: rgba(22, 22, 22, 0.98);
-  border: 1px solid #3d1a5a; /* Brighter spectral violet */
-  border-top: 3px solid #8b0000; /* Vivid blood */
-  margin-bottom: 50px;
-  width: 100%;
-  max-width: 500px;
-  padding: 35px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
-  position: relative;
+  text-align: center;
   z-index: 5;
 }
 
+/* Main Container - Positions checklists side-by-side */
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 100%;
+  max-width: 1100px;
+  flex-wrap: wrap; /* Stacks on smaller screens automatically */
+  z-index: 5;
+}
+
+/* Section styling - Polished Onyx / Altar look */
+.checklist-section {
+  flex: 1;
+  min-width: 320px;
+  max-width: 500px;
+  background: rgba(18, 18, 18, 0.98);
+  border: 1px solid #3d1a5a; /* Spectral violet */
+  border-top: 3px solid #8b0000; /* Vivid blood accent */
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+  transition: transform 0.3s ease;
+}
+
 .checklist-section h2 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #af0000;
   text-transform: uppercase;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   margin-top: 0;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #2a2a2a;
   padding-bottom: 15px;
   text-align: center;
+}
+
+/* List container */
+.box {
+  margin: 20px 0;
+  min-height: 50px;
 }
 
 /* Individual item styling */
@@ -76,27 +85,21 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #111;
+  background-color: #0d0d0d;
   border: 1px solid #222;
-  padding: 18px;
-  margin-bottom: 12px;
+  padding: 15px;
+  margin-bottom: 10px;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .checklist-item:hover {
-  background-color: #1a1a1a;
+  background-color: #151515;
   border-color: #af0000;
-  box-shadow: 0 0 15px rgba(175, 0, 0, 0.2);
+  box-shadow: 0 0 15px rgba(175, 0, 0, 0.15);
   transform: translateX(5px);
 }
 
-/* Label and Text - Enhanced legibility */
-.checklist-item span {
-  font-size: 1.15rem;
-  color: #e0d7c6;
-  text-shadow: 1px 1px 2px #000;
-}
-
+/* Completed/Satiated State */
 .checklist-item.completed {
   opacity: 0.4;
 }
@@ -106,30 +109,45 @@ h1 {
   color: #666;
 }
 
-/* Sinister Checkbox - Better feedback */
+/* Label and Text */
+.checklist-item label {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.checklist-item span {
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* Custom Sinister Checkbox */
 input[type="checkbox"] {
   appearance: none;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border: 1px solid #8b0000;
   background: #000;
   cursor: pointer;
   transition: all 0.3s;
+  position: relative;
 }
 
 input[type="checkbox"]:checked {
   background: #af0000;
-  border-color: #ff0000;
   box-shadow: 0 0 8px #ff0000;
 }
 
 input[type="checkbox"]:checked::after {
   content: "✕";
   color: #fff;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Delete Button */
@@ -137,9 +155,9 @@ input[type="checkbox"]:checked::after {
   background: none;
   border: none;
   color: #8b0000;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 0.4;
   transition: 0.3s;
 }
 
@@ -149,28 +167,29 @@ input[type="checkbox"]:checked::after {
 
 .delete-btn:hover {
   color: #ff3333;
-  transform: scale(1.2);
+  transform: scale(1.2) rotate(90deg);
 }
 
-/* Add Item Input Area - Higher contrast */
+/* Add Item Input Area */
 .add-item {
   display: flex;
-  margin-top: 30px;
+  margin-top: 25px;
   border: 1px solid #3d1a5a;
+  background: #000;
 }
 
 .add-item input[type="text"] {
   flex: 1;
-  background-color: #050505;
+  background: transparent;
   border: none;
-  padding: 15px;
+  padding: 12px;
   color: #e0d7c6;
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
-.add-item input[type="text"]::placeholder {
-  color: #444;
+.add-item input[type="text"]:focus {
+  outline: none;
 }
 
 .button {
@@ -178,14 +197,30 @@ input[type="checkbox"]:checked::after {
   color: #af0000;
   border: none;
   border-left: 1px solid #3d1a5a;
-  padding: 0 25px;
+  padding: 0 20px;
   cursor: pointer;
   font-family: "Cinzel", serif;
   font-weight: bold;
+  text-transform: uppercase;
   transition: all 0.3s;
 }
 
 .button:hover {
   background-color: #af0000;
   color: #fff;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Scrollbar from the abyss */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a0404;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8b0000;
 }
