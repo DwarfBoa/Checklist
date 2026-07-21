@@ -1,144 +1,85 @@
-import { initializeApp } from "firebase/app";
-import {
-  getDatabase,
-  ref,
-  onValue,
-  push,
-  set,
-  update,
-  remove,
-} from "firebase/database";
-
+// TODO: Replace with your actual Firebase project configuration
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
+  apiKey: "AIzaSyBbe15VXxGOK-Cyn8R7LhCdBca02scIClk",
+  authDomain: "checklist-aaa78.firebaseapp.com",
+  databaseURL:
+    "https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "checklist-aaa78",
+  storageBucket: "checklist-aaa78.firebasestorage.app",
+  messagingSenderId: "811744103873",
+  appId: "1:811744103873:web:46da1c5bbcedaca5e1b340",
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-function setupChecklist(formId, buttonId, inputId, storageKey) {
-  const form = document.getElementById(formId);
-  const button = document.getElementById(buttonId);
-  const input = document.getElementById(inputId);
-
-  loadChecklist(storageKey, form);
-
-  button.addEventListener("click", (event) => {
-    event.preventDefault();
-    addItem(input, storageKey, form);
-  });
-}
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 document.addEventListener("DOMContentLoaded", () => {
-  setupChecklist(
-    "moviesChecklistForm",
-    "addMovieButton",
-    "newMovieInput",
-    "moviesChecklistItems"
-  );
-  setupChecklist(
-    "activitiesChecklistForm",
-    "addActivityButton",
+  syncCollection("movies", "moviesList", "newMovieInput", "addMovieButton");
+  syncCollection(
+    "activities",
+    "activitiesList",
     "newActivityInput",
-    "activitiesChecklistItems"
+    "addActivityButton"
   );
 });
 
-function loadChecklist(storageKey, form) {
-  const storageRef = ref(db, storageKey);
-  onValue(storageRef, (snapshot) => {
-    form.innerHTML = "";
-    const items = snapshot.val();
-    if (items) {
-      Object.keys(items).forEach((key) => {
-        const item = items[key];
-        addItemToForm(item.text, item.checked, form, storageKey, key);
+function syncCollection(collectionName, listId, inputId, buttonId) {
+  const listContainer = document.getElementById(listId);
+  const inputField = document.getElementById(inputId);
+  const addButton = document.getElementById(buttonId);
+
+  // 1. Listen for Real-time Updates (Collaboration)
+  db.collection(collectionName)
+    .orderBy("createdAt", "asc")
+    .onSnapshot((snapshot) => {
+      listContainer.innerHTML = ""; // Clear current UI
+      snapshot.forEach((doc) => {
+        renderItem(collectionName, doc.id, doc.data(), listContainer);
       });
-    } else {
-      form.innerHTML = "<p>No items found.</p>";
+    });
+
+  // 2. Add New Item to Cloud
+  const addItem = () => {
+    const text = inputField.value.trim();
+    if (text) {
+      db.collection(collectionName).add({
+        text: text,
+        completed: false,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      inputField.value = "";
     }
-  });
+  };
+
+  addButton.onclick = addItem;
+  inputField.onkeypress = (e) => {
+    if (e.key === "Enter") addItem();
+  };
 }
 
-function addItem(input, storageKey, form) {
-  const newItemText = input.value.trim();
-  if (!newItemText) {
-    alert("Item cannot be empty.");
-    return;
-  }
+function renderItem(collectionName, id, data, container) {
+  const div = document.createElement("div");
+  div.className = `checklist-item ${data.completed ? "completed" : ""}`;
+  div.innerHTML = `
+      <label style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" ${data.completed ? "checked" : ""}>
+          <span>${data.text}</span>
+      </label>
+      <button class="delete-btn">✕</button>
+  `;
 
-  const existingItems = Array.from(form.querySelectorAll("label")).map(
-    (label) => label.textContent
-  );
-  if (existingItems.includes(newItemText)) {
-    alert("Item already exists.");
-    return;
-  }
+  // Toggle Complete
+  div.querySelector("input").onclick = () => {
+    db.collection(collectionName)
+      .doc(id)
+      .update({ completed: !data.completed });
+  };
 
-  const storageRef = ref(db, storageKey);
-  const newItemRef = push(storageRef);
-  set(newItemRef, {
-    text: newItemText,
-    checked: false,
-  });
-  input.value = "";
-}
+  // Delete Item
+  div.querySelector(".delete-btn").onclick = () => {
+    db.collection(collectionName).doc(id).delete();
+  };
 
-function addItemToForm(text, checked, form, storageKey, key) {
-  const itemContainer = document.createElement("div");
-  itemContainer.className = "checklist-item";
-
-  const checkbox = document.createElement("input");
-  const uniqueId = `checkbox-${storageKey}-${key}`;
-  checkbox.type = "checkbox";
-  checkbox.id = uniqueId;
-  checkbox.checked = checked;
-  checkbox.setAttribute("aria-label", `Mark ${text} as completed`);
-  checkbox.addEventListener("change", () => {
-    updateItemInFirebase(storageKey, key, { checked: checkbox.checked });
-  });
-
-  const label = document.createElement("label");
-  label.htmlFor = uniqueId;
-  label.textContent = text;
-
-  const removeButton = document.createElement("button");
-  removeButton.textContent = "Remove";
-  removeButton.className = "remove-button";
-  removeButton.setAttribute("aria-label", `Remove ${text}`);
-  removeButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    removeItemFromFirebase(storageKey, key);
-  });
-
-  itemContainer.appendChild(checkbox);
-  itemContainer.appendChild(label);
-  itemContainer.appendChild(removeButton);
-  form.appendChild(itemContainer);
-}
-
-async function updateItemInFirebase(storageKey, key, updates) {
-  try {
-    const itemRef = ref(db, `${storageKey}/${key}`);
-    await update(itemRef, updates);
-  } catch (error) {
-    console.error("Error updating item:", error);
-    alert("Failed to update the item. Please try again.");
-  }
-}
-
-async function removeItemFromFirebase(storageKey, key) {
-  try {
-    const itemRef = ref(db, `${storageKey}/${key}`);
-    await remove(itemRef);
-  } catch (error) {
-    console.error("Error removing item:", error);
-    alert("Failed to remove the item. Please try again.");
-  }
+  container.appendChild(div);
 }
