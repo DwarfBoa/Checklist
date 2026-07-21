@@ -1,11 +1,11 @@
-[debug] [2026-07-21T18:36:19.386Z] ----------------------------------------------------------------------
-[debug] [2026-07-21T18:36:19.388Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
-[debug] [2026-07-21T18:36:19.388Z] CLI Version:   15.23.0
-[debug] [2026-07-21T18:36:19.388Z] Platform:      win32
-[debug] [2026-07-21T18:36:19.388Z] Node Version:  v24.18.0
-[debug] [2026-07-21T18:36:19.388Z] Detected Agent: unknown
-[debug] [2026-07-21T18:36:19.388Z] Time:          Tue Jul 21 2026 19:36:19 GMT+0100 (British Summer Time)
-[debug] [2026-07-21T18:36:19.389Z] ----------------------------------------------------------------------
+[debug] [2026-07-21T19:07:33.830Z] ----------------------------------------------------------------------
+[debug] [2026-07-21T19:07:33.832Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2026-07-21T19:07:33.832Z] CLI Version:   15.24.0
+[debug] [2026-07-21T19:07:33.832Z] Platform:      win32
+[debug] [2026-07-21T19:07:33.832Z] Node Version:  v24.18.0
+[debug] [2026-07-21T19:07:33.832Z] Detected Agent: unknown
+[debug] [2026-07-21T19:07:33.832Z] Time:          Tue Jul 21 2026 20:07:33 GMT+0100 (British Summer Time)
+[debug] [2026-07-21T19:07:33.832Z] ----------------------------------------------------------------------
 [debug] 
 [info] 
      ######## #### ########  ######## ########     ###     ######  ########
@@ -18,19 +18,23 @@ You're about to initialize a Firebase project in this directory:
 
   C:\Users\lucas\Documents\GitHub\Checklist
 
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
 [info] 
 === Project Setup
 [info] 
 [info] First, let's associate this project directory with a Firebase project.
 [info] You can create multiple project aliases by running firebase use --add, 
 [info] 
-[debug] [2026-07-21T18:37:52.162Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2026-07-21T18:37:52.162Z] > authorizing via signed-in user (ilowgaspricws@googlemail.com)
-[debug] [2026-07-21T18:37:52.173Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:37:52.174Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:37:52.175Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 [none]
-[debug] [2026-07-21T18:37:52.487Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 200
-[debug] [2026-07-21T18:37:52.487Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 {"projectId":"checklist-aaa78","projectNumber":"811744103873","displayName":"Checklist","name":"projects/checklist-aaa78","resources":{"hostingSite":"checklist-aaa78","realtimeDatabaseInstance":"checklist-aaa78-default-rtdb"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_382c2e79-b7b4-4788-a0f0-a6c17529654c"}
+[debug] [2026-07-21T19:07:48.005Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-07-21T19:07:48.005Z] > authorizing via signed-in user (ilowgaspricws@googlemail.com)
+[debug] [2026-07-21T19:07:48.016Z] Checked if tokens are valid: true, expires at: 1784662212534
+[debug] [2026-07-21T19:07:48.016Z] Checked if tokens are valid: true, expires at: 1784662212534
+[debug] [2026-07-21T19:07:48.017Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 [none]
+[debug] [2026-07-21T19:07:48.306Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 200
+[debug] [2026-07-21T19:07:48.306Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 {"projectId":"checklist-aaa78","projectNumber":"811744103873","displayName":"Checklist","name":"projects/checklist-aaa78","resources":{"hostingSite":"checklist-aaa78","realtimeDatabaseInstance":"checklist-aaa78-default-rtdb"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_382c2e79-b7b4-4788-a0f0-a6c17529654c"}
 [info] i  Using project checklist-aaa78 (Checklist) . 
 [info] 
 === Database Setup
@@ -40,89 +44,22 @@ You're about to initialize a Firebase project in this directory:
 [info] 
 [info] i  database: ensuring required API firebasedatabase.googleapis.com is enabled... 
 [info] 
-[debug] [2026-07-21T18:38:01.027Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:01.027Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:01.027Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 [none]
-[debug] [2026-07-21T18:38:01.337Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 200
-[debug] [2026-07-21T18:38:01.337Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 {"projectId":"checklist-aaa78","projectNumber":"811744103873","displayName":"Checklist","name":"projects/checklist-aaa78","resources":{"hostingSite":"checklist-aaa78","realtimeDatabaseInstance":"checklist-aaa78-default-rtdb"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_382c2e79-b7b4-4788-a0f0-a6c17529654c"}
-[debug] [2026-07-21T18:38:01.337Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:01.338Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:01.338Z] >>> [apiv2][query] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb [none]
-[debug] [2026-07-21T18:38:02.059Z] <<< [apiv2][status] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb 200
-[debug] [2026-07-21T18:38:02.060Z] <<< [apiv2][body] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb {"name":"projects/811744103873/locations/europe-west1/instances/checklist-aaa78-default-rtdb","project":"projects/811744103873","databaseUrl":"https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app","type":"DEFAULT_DATABASE","state":"ACTIVE"}
-[debug] [2026-07-21T18:38:02.060Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:02.060Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:02.060Z] >>> [apiv2][query] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json [none]
-[debug] [2026-07-21T18:38:02.178Z] <<< [apiv2][status] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json 200
-[debug] [2026-07-21T18:38:02.178Z] <<< [apiv2][body] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json [stream]
-[debug] [2026-07-21T18:38:02.180Z] TypeError: Body is unusable: Body has already been read
-    at consumeBody (node:internal/deps/undici/undici:7035:31)
-    at _Response.text (node:internal/deps/undici/undici:6983:18)
-    at getDBRules (C:\Users\lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\database.js:33:36)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async Object.askQuestions (C:\Users\lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\database.js:106:26)
-    at async init (C:\Users\lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:102:17)
-    at async Command.initAction [as actionFn] (C:\Users\lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\init.js:232:5)
-[error] 
-[error] Error: An unexpected error has occurred.
-[debug] [2026-07-21T18:38:38.485Z] ----------------------------------------------------------------------
-[debug] [2026-07-21T18:38:38.487Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
-[debug] [2026-07-21T18:38:38.487Z] CLI Version:   15.23.0
-[debug] [2026-07-21T18:38:38.487Z] Platform:      win32
-[debug] [2026-07-21T18:38:38.487Z] Node Version:  v24.18.0
-[debug] [2026-07-21T18:38:38.487Z] Detected Agent: unknown
-[debug] [2026-07-21T18:38:38.487Z] Time:          Tue Jul 21 2026 19:38:38 GMT+0100 (British Summer Time)
-[debug] [2026-07-21T18:38:38.487Z] ----------------------------------------------------------------------
-[debug] 
-[info] 
-     ######## #### ########  ######## ########     ###     ######  ########
-     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
-     ######    ##  ########  ######   ########  #########  ######  ######
-     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
-     ##       #### ##     ## ######## ########  ##     ##  ######  ########
-
-You're about to initialize a Firebase project in this directory:
-
-  C:\Users\lucas\Documents\GitHub\Checklist
-
-[info] 
-=== Project Setup
-[info] 
-[info] First, let's associate this project directory with a Firebase project.
-[info] You can create multiple project aliases by running firebase use --add, 
-[info] 
-[debug] [2026-07-21T18:38:46.431Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2026-07-21T18:38:46.432Z] > authorizing via signed-in user (ilowgaspricws@googlemail.com)
-[debug] [2026-07-21T18:38:46.442Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:46.442Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:46.443Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 [none]
-[debug] [2026-07-21T18:38:46.706Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 200
-[debug] [2026-07-21T18:38:46.706Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 {"projectId":"checklist-aaa78","projectNumber":"811744103873","displayName":"Checklist","name":"projects/checklist-aaa78","resources":{"hostingSite":"checklist-aaa78","realtimeDatabaseInstance":"checklist-aaa78-default-rtdb"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_382c2e79-b7b4-4788-a0f0-a6c17529654c"}
-[info] i  Using project checklist-aaa78 (Checklist) . 
-[info] 
-=== Database Setup
-[info] 
-[info] Firebase Realtime Database Security Rules allow you to define how your data should be
-[info] structured and when your data can be read from and written to.
-[info] 
-[info] i  database: ensuring required API firebasedatabase.googleapis.com is enabled... 
-[info] 
-[debug] [2026-07-21T18:38:48.611Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:48.611Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:48.612Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 [none]
-[debug] [2026-07-21T18:38:48.850Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 200
-[debug] [2026-07-21T18:38:48.851Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 {"projectId":"checklist-aaa78","projectNumber":"811744103873","displayName":"Checklist","name":"projects/checklist-aaa78","resources":{"hostingSite":"checklist-aaa78","realtimeDatabaseInstance":"checklist-aaa78-default-rtdb"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_382c2e79-b7b4-4788-a0f0-a6c17529654c"}
-[debug] [2026-07-21T18:38:48.851Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:48.851Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:48.851Z] >>> [apiv2][query] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb [none]
-[debug] [2026-07-21T18:38:49.547Z] <<< [apiv2][status] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb 200
-[debug] [2026-07-21T18:38:49.547Z] <<< [apiv2][body] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb {"name":"projects/811744103873/locations/europe-west1/instances/checklist-aaa78-default-rtdb","project":"projects/811744103873","databaseUrl":"https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app","type":"DEFAULT_DATABASE","state":"ACTIVE"}
-[debug] [2026-07-21T18:38:49.547Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:49.547Z] Checked if tokens are valid: true, expires at: 1784662212534
-[debug] [2026-07-21T18:38:49.547Z] >>> [apiv2][query] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json [none]
-[debug] [2026-07-21T18:38:49.617Z] <<< [apiv2][status] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json 200
-[debug] [2026-07-21T18:38:49.618Z] <<< [apiv2][body] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json [stream]
-[debug] [2026-07-21T18:38:49.620Z] TypeError: Body is unusable: Body has already been read
+[debug] [2026-07-21T19:07:50.704Z] Checked if tokens are valid: true, expires at: 1784662212534
+[debug] [2026-07-21T19:07:50.704Z] Checked if tokens are valid: true, expires at: 1784662212534
+[debug] [2026-07-21T19:07:50.704Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 [none]
+[debug] [2026-07-21T19:07:50.963Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 200
+[debug] [2026-07-21T19:07:50.963Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/checklist-aaa78 {"projectId":"checklist-aaa78","projectNumber":"811744103873","displayName":"Checklist","name":"projects/checklist-aaa78","resources":{"hostingSite":"checklist-aaa78","realtimeDatabaseInstance":"checklist-aaa78-default-rtdb"},"state":"ACTIVE","labels":{"firebase":"enabled"},"etag":"1_382c2e79-b7b4-4788-a0f0-a6c17529654c"}
+[debug] [2026-07-21T19:07:50.963Z] Checked if tokens are valid: true, expires at: 1784662212534
+[debug] [2026-07-21T19:07:50.963Z] Checked if tokens are valid: true, expires at: 1784662212534
+[debug] [2026-07-21T19:07:50.964Z] >>> [apiv2][query] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb [none]
+[debug] [2026-07-21T19:07:51.648Z] <<< [apiv2][status] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb 200
+[debug] [2026-07-21T19:07:51.648Z] <<< [apiv2][body] GET https://firebasedatabase.googleapis.com/v1beta/projects/checklist-aaa78/locations/-/instances/checklist-aaa78-default-rtdb {"name":"projects/811744103873/locations/europe-west1/instances/checklist-aaa78-default-rtdb","project":"projects/811744103873","databaseUrl":"https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app","type":"DEFAULT_DATABASE","state":"ACTIVE"}
+[debug] [2026-07-21T19:07:51.648Z] Checked if tokens are valid: true, expires at: 1784662212534
+[debug] [2026-07-21T19:07:51.648Z] Checked if tokens are valid: true, expires at: 1784662212534
+[debug] [2026-07-21T19:07:51.648Z] >>> [apiv2][query] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json [none]
+[debug] [2026-07-21T19:07:51.716Z] <<< [apiv2][status] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json 200
+[debug] [2026-07-21T19:07:51.716Z] <<< [apiv2][body] GET https://checklist-aaa78-default-rtdb.europe-west1.firebasedatabase.app/.settings/rules.json [stream]
+[debug] [2026-07-21T19:07:51.718Z] TypeError: Body is unusable: Body has already been read
     at consumeBody (node:internal/deps/undici/undici:7035:31)
     at _Response.text (node:internal/deps/undici/undici:6983:18)
     at getDBRules (C:\Users\lucas\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\database.js:33:36)
