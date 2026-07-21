@@ -1,14 +1,32 @@
-// Movies Checklist
+// Import the Firebase SDK modules you need
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, onValue, push, set, update, remove } from "firebase/database";
+
+// Firebase configuration (replace with your Firebase config)
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  databaseURL: "YOUR_DATABASE_URL",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// DOM Elements
 const moviesForm = document.getElementById("moviesChecklistForm");
 const addMovieButton = document.getElementById("addMovieButton");
 const newMovieInput = document.getElementById("newMovieInput");
 
-// Activities Checklist
 const activitiesForm = document.getElementById("activitiesChecklistForm");
 const addActivityButton = document.getElementById("addActivityButton");
 const newActivityInput = document.getElementById("newActivityInput");
 
-// Load saved items from localStorage on page load
+// Load checklists from Firebase on page load
 document.addEventListener("DOMContentLoaded", () => {
   loadChecklist("moviesChecklistItems", moviesForm);
   loadChecklist("activitiesChecklistItems", activitiesForm);
@@ -17,34 +35,45 @@ document.addEventListener("DOMContentLoaded", () => {
 // Add event listeners for adding items
 addMovieButton.addEventListener("click", (event) => {
   event.preventDefault();
-  addItem(newMovieInput, moviesForm, "moviesChecklistItems");
+  addItem(newMovieInput, "moviesChecklistItems", moviesForm);
 });
 
 addActivityButton.addEventListener("click", (event) => {
   event.preventDefault();
-  addItem(newActivityInput, activitiesForm, "activitiesChecklistItems");
+  addItem(newActivityInput, "activitiesChecklistItems", activitiesForm);
 });
 
-// Function to load a checklist from localStorage
+// Function to load a checklist from Firebase
 function loadChecklist(storageKey, form) {
-  const savedItems = JSON.parse(localStorage.getItem(storageKey)) || [];
-  savedItems.forEach((item) => {
-    addItemToForm(item.text, item.checked, form, storageKey);
+  const storageRef = ref(db, storageKey);
+  onValue(storageRef, (snapshot) => {
+    form.innerHTML = ""; // Clear the form
+    const items = snapshot.val();
+    if (items) {
+      Object.keys(items).forEach((key) => {
+        const item = items[key];
+        addItemToForm(item.text, item.checked, form, storageKey, key);
+      });
+    }
   });
 }
 
-// Function to add an item
-function addItem(input, form, storageKey) {
+// Function to add an item to Firebase
+function addItem(input, storageKey, form) {
   const newItemText = input.value.trim();
   if (newItemText) {
-    addItemToForm(newItemText, false, form, storageKey);
-    saveItemToLocalStorage(newItemText, false, storageKey);
-    input.value = "";
+    const storageRef = ref(db, storageKey);
+    const newItemRef = push(storageRef);
+    set(newItemRef, {
+      text: newItemText,
+      checked: false,
+    });
+    input.value = ""; // Clear the input field
   }
 }
 
 // Function to add an item to the form
-function addItemToForm(text, checked, form, storageKey) {
+function addItemToForm(text, checked, form, storageKey, key) {
   const itemContainer = document.createElement("div");
   itemContainer.className = "checklist-item";
 
@@ -53,52 +82,34 @@ function addItemToForm(text, checked, form, storageKey) {
   const removeButton = document.createElement("button");
 
   checkbox.type = "checkbox";
-  checkbox.id = text.toLowerCase().replace(/\s+/g, "-");
-  checkbox.name = "dynamic";
-  checkbox.value = text;
   checkbox.checked = checked;
+  checkbox.addEventListener("change", () => {
+    updateItemInFirebase(storageKey, key, { checked: checkbox.checked });
+  });
 
-  label.htmlFor = checkbox.id;
   label.textContent = text;
 
   removeButton.textContent = "Remove";
   removeButton.className = "remove-button";
   removeButton.addEventListener("click", (event) => {
     event.preventDefault();
-    removeItemFromForm(text, itemContainer, storageKey);
+    removeItemFromFirebase(storageKey, key);
   });
 
   itemContainer.appendChild(checkbox);
   itemContainer.appendChild(label);
   itemContainer.appendChild(removeButton);
   form.appendChild(itemContainer);
-
-  checkbox.addEventListener("change", () => {
-    updateItemInLocalStorage(text, checkbox.checked, storageKey);
-  });
 }
 
-// Function to save an item to localStorage
-function saveItemToLocalStorage(text, checked, storageKey) {
-  const savedItems = JSON.parse(localStorage.getItem(storageKey)) || [];
-  savedItems.push({ text, checked });
-  localStorage.setItem(storageKey, JSON.stringify(savedItems));
+// Function to update an item in Firebase
+function updateItemInFirebase(storageKey, key, updates) {
+  const itemRef = ref(db, `${storageKey}/${key}`);
+  update(itemRef, updates);
 }
 
-// Function to update an item's checked state in localStorage
-function updateItemInLocalStorage(text, checked, storageKey) {
-  const savedItems = JSON.parse(localStorage.getItem(storageKey)) || [];
-  const itemIndex = savedItems.findIndex((item) => item.text === text);
-  if (itemIndex !== -1) {
-    savedItems[itemIndex].checked = checked;
-    localStorage.setItem(storageKey, JSON.stringify(savedItems));
-  }
-}
-
-// Function to remove an item from the form and localStorage
-function removeItemFromForm(text, itemContainer, storageKey) {
-  itemContainer.remove();
-  const savedItems = JSON.parse(localStorage.getItem(storageKey)) || [];
-  const updatedItems = savedItems.filter((item) => item.text !== text);
-  localStorage.setItem(storageKey, JSON.stringify(updatedItems));
+// Function to remove an item from Firebase
+function removeItemFromFirebase(storageKey, key) {
+  const itemRef = ref(db, `${storageKey}/${key}`);
+  remove(itemRef);
 }
